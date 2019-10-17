@@ -48,7 +48,7 @@ class SensorManager {
                 Dist500::FunctionAreaStatusList sl;
                 dists[i]->getFunctionAreaStatuses(sl);
                 // let's see what we got
-                std::cout << "Got this far1 - " << sl.size() << std::endl;
+//                std::cout << "Got this far1 - " << sl.size() << std::endl;
 
                 std::cout << "Starting counting..." << std::endl;
                 sleep(10);
