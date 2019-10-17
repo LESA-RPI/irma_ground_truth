@@ -1,5 +1,5 @@
 #define SENSORAPI_DLL
-#define BOOST_ALL_NO_LIB
+//#define BOOST_ALL_NO_LIB
 
 //STL includes
 #include <iostream>
