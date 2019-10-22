@@ -1,6 +1,6 @@
 #include "includes.h"
 #include "pictureprocessor.h"
-#include "sensormanager.h"
+//#include "sensormanager.h"
 #include <iostream>
 #include <string>
 
@@ -23,7 +23,8 @@ void callback(void* userData, iris::uip::ulong index, iris::uip::ulong total,
     cout << ((index + 1) * 100.0 / total) << " %" << endl;
 }
 
-int old_main() {
+int main() {
+    std::cout << "Starting" << std::endl;
     // get reference to central driver manager
     DriverManager& dm = DriverManager::getInstance();
     // try to register and enable default drivers (currently udp and can)
@@ -41,6 +42,7 @@ int old_main() {
     // let's see what we got
     for (Dist500::FunctionAreaStatusList::const_iterator i = sl.begin(); i != sl.end(); ++i) {
         functionAreaStatus stat = *i;
+        std::cout << "Stat: " << stat.functionAreaStatusBytes << std::endl;
         // new result available ?
         if (stat.functionAreaStatusBytes == new_counting_result) {
             Dist500::CountList cl;
@@ -69,6 +71,7 @@ int old_main() {
             }*/
         }
     }
+    std::cout << "Ending" << std::endl;
 }
 
 int door_state_main() {
@@ -129,10 +132,10 @@ int config_main() {
 //	return 0;
 //}
 //
-int main() {
-    SensorManager s("config.txt");
-    while (true) {
-        s.startUpdating();
-    }
-    return 0;
-}
+//int old_main() {
+//    SensorManager s("config.txt");
+//    while (true) {
+//        s.startUpdating();
+//    }
+//    return 0;
+//}
