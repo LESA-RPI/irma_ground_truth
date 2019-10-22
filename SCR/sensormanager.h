@@ -61,8 +61,49 @@ class SensorManager {
 //
 //            }
 
-//            Sensor& s = dm.getSensorFor("udp://10.3.35.21#1");
-//            Dist500* d5 = new Dist500(s);
+
+            Dist500::SensorStatusSet sss;
+            Sensor& s = dm.getSensorFor("udp://10.3.35.21#1");
+            Dist500* d5 = new Dist500(s);
+            Dist500::CountList cl;
+
+
+            d5->setDoorState(1, 1, 0, 0);
+            d5->stopCounting();
+            iris::uip::__counter_type buffercounter = iris::uip::buffer_counter;
+//            d5->resetCounts(1, buffer_counter);
+
+
+            std::cout << "starting" << std::endl;
+            d5->setDoorState(1, 1, 100, 100);
+            std::cout << "door open" << std::endl;
+            d5->startCounting();
+            std::cout << "started counting" << std::endl;
+            sleep(10);
+            d5->setDoorState(1, 1, 0, 0);
+            std::cout << "closed doors" << std::endl;
+            d5->stopCounting();
+            std::cout << "stopped counting" << std::endl;
+
+
+
+            d5->getCountResults(1, buffercounter, false, 0xff, cl);
+            // output the data
+            for (Dist500::CountList::const_iterator k = cl.begin(); k != cl.end(); ++k) {
+                category_counts cnt = *k;
+                cout << "fa " << 1 << " - category " << (int) cnt.categoryId << ": "
+                     << cnt.boarding
+                     << " in / " << cnt.alighting << " out\n";
+            }
+//            d5->startCounting();
+
+//            while (true) {
+//                d5->setDoorState(1, 1, 100, 100);
+//                d5->getSensorStatuses(sss);
+//
+//                d5->getCountResults(1, buffercounter, true, 0x01, cl);
+//            }
+
 //
 //            unsigned short fa = d5->getSensorInfo().getFunctionArea();
 //            std::cout << "fa:" << fa << std::endl;
@@ -87,116 +128,6 @@ class SensorManager {
 //            sleep(5);
 //            d5->stopCounting();
 //            std::cout << "Stopped counting" << std::endl;
-//
-//            Dist500::CategoryList categories;
-//
-//            std::cout << categories.size() << std::endl;
-//            d5->getCountCategories(fa, categories);
-//
-//            d5->getSensorStatuses(sss);
-//            std::cout << "Sss size after counting time: " << sss.size() << std::endl;
-//
-//            if (sss.find(service_mode_active) != sss.end()) {
-//                cout << "sensor is in service mode" << endl;
-//            }
-//
-//            // retrieve status bytes
-//            Dist500::FunctionAreaStatusList sl;
-//            d5->getFunctionAreaStatuses(sl);
-//            // let's see what we got
-//            d5->getWorkingMode(currentMode);
-//            std::cout << "Working mode" << currentMode << std::endl;
-//
-//            std::cout << "Got this far1 - " << sl.size() << std::endl;
-//            Dist500::CountList cl;
-//            // get available counts for all categories
-//            // query count results for function area
-//            // use buffered values
-//            // reset counts after transmission
-//            d5->getCountResults(fa, buffer_counter, true, 0xff, cl);
-//            // output the data
-//            for (Dist500::CountList::const_iterator k = cl.begin(); k != cl.end(); ++k) {
-//                category_counts cnt = *k;
-//                cout << "fa " << fa << " - category " << (int) cnt.categoryId << ": " << cnt.boarding
-//                     << " in / " << cnt.alighting << " out\n";
-//            }
-
-            // create DIST500 instance
-            Sensor& s = dm.getSensorFor(SENSOR_URL);
-            Dist500* d5 = new Dist500(s);
-            // get information about supported categories
-            unsigned short fa = d5->getSensorInfo().getFunctionArea();
-            Dist500::CategoryList categories;
-            d5->getCountCategories(fa, categories);
-            // retrieve status bytes
-            Dist500::FunctionAreaStatusList sl;
-            d5->getFunctionAreaStatuses(sl);
-            // let's see what we got
-            for (Dist500::FunctionAreaStatusList::const_iterator i = sl.begin(); i != sl.end(); ++i) {
-                functionAreaStatus stat = *i;
-                // new result available ?
-                if (stat.functionAreaStatusBytes == new_counting_result) {
-                    Dist500::CountList cl;
-                    // get available counts for all categories
-                    // query count results for function area
-                    // use buffered values
-                    // reset counts after transmission
-                    d5->getCountResults(stat.functionAreaNumber, buffer_counter, true, 0xff, cl);
-                    // output the data
-                    for (Dist500::CountList::const_iterator k = cl.begin(); k != cl.end(); ++k) {
-                        category_counts cnt = *k;
-                        cout << "fa " << stat.functionAreaNumber << " - category " << (int) cnt.categoryId << ": " << cnt.boarding
-                             << " in / " << cnt.alighting << " out\n";
-                    }
-                    // alternative: iterate over cagegories
-                    /*for (Dist500::CategoryList::const_iterator j = categories.begin(); j != categories.end(); ++j) {
-                        iris::uip::category cat = *j;
-                        // get available counts for given category
-                        // query count results for function area
-                        // use buffered values
-                        // reset counts after transmission
-                        d5->getCountResults(stat.functionAreaNumber, buffer_counter, true, cat.id, cl);
-                        category_counts cnt = cl.first();
-                        cout << "fa " << stat.functionAreaNumber << " - category " << (int) cnt.categoryId << ": " << cnt.boarding
-                             << " in / " << cnt.alighting << " out\n";
-                    }*/
-                }
-            }
-			// -------
-//			for (unsigned int i = 0; i < sensorURLs.size(); ++i) {
-//			    printf("started cycle\r\n");
-//
-//				sensors[i] = &dm.getSensorFor(sensorURLs[i]);
-//				dists[i] = new Dist500(*sensors[i]);
-//
-//                unsigned short fa = 1;
-//                unsigned short door = 1;
-//				dists[i]->setDoorState(fa, door, 100, 100);
-//
-//				Dist500::CountList cl;
-//                Dist500::CountList crl;
-//                iris::uip::__counter_type buffercounter = iris::uip::buffer_counter;
-//
-//                int count = 0;
-//
-//                while (1){
-//                    dists[i]->setDoorState(fa, door, 100, 100);
-//                    dists[i]->startCounting();
-//                    std::cout << "Starting counting..." << std::endl;
-//                    sleep(10);
-//                    std::cout << "Ending counting..." << std::endl;
-//                    dists[i]->stopCounting();
-//                    count++;
-//
-//                    dists[i]->getCountResults(fa, buffercounter, true, 0xff, cl);
-//                    for (Dist500::CountList::iterator i = cl.begin(); i != cl.end(); ++i) {
-//                        iris::uip::category_counts cc = *i;
-//                        std::cout << "cat " << (int) cc.categoryId << ": in " <<
-//                             cc.boarding << " / out " << cc.alighting << "\r\n";}
-//                    printf("%u counts\r\n", count);
-//                }
-//			} */
-
 		}
 
 		void stopUpdating() {
