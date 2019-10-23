@@ -11,9 +11,9 @@ now_strf: str = datetime.datetime.now().strftime("%d-%m-%Y.%H:%M")
 
 # assume the compiled version is up-to-date
 if create_new:
-    output_file = open(f"Trial{now_strf}.txt", "w+")  # type: ignore
+    output_file = open(f"Trial{now_strf}.csv", "w+")  # type: ignore
 else:
-    output_file = open(f"Trial_overwrite.txt", "w+")  # type: ignore
+    output_file = open(f"Trial_overwrite.csv", "w+")  # type: ignore
 
 # write header
 output_file.writelines(["In,Out,In-Out,DeltaT"])
