@@ -18,7 +18,7 @@ else:
 # write header
 output_file.writelines([f"In,Out,In-Out,DeltaT  ## Start Time: {now_strf}"])
 
-time_to_record: int = 150       # rounds
+time_to_record: int = 14400       # rounds
 
 for i in range(time_to_record):
     subprocess.call(["./tof"], shell=True, stdout=output_file)
