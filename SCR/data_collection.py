@@ -4,7 +4,7 @@
 import datetime
 import subprocess
 
-create_new: bool = False
+create_new: bool = True
 
 # create a identifier
 now_strf: str = datetime.datetime.now().strftime("%d-%m-%Y.%H:%M")
@@ -16,7 +16,7 @@ else:
     output_file = open(f"Trial_overwrite.csv", "w+")  # type: ignore
 
 # write header
-output_file.writelines(["In,Out,In-Out,DeltaT"])
+output_file.writelines([f"In,Out,In-Out,DeltaT  ## Start Time: {now_strf}"])
 
 time_to_record: int = 150       # rounds
 
