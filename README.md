@@ -1,4 +1,15 @@
 # tof_control
-A C++ server for communication with Time of Flight sensors
+A Python-layered C++ script for the IRMA Matrix sensor. Driven through Docker on MacOS, this is a simple utility for pulling count data.
 
-Designed to work with www.github.com/duffym4/scr_control
+On MacOS, use the standard Linux Docker container. Use the following standard:
+```
+docker build -t lesa .
+docker run --volume $(pwd):/code:consistent -it --name "lesa1" lesa
+docker start lesa1
+docker attach lesa1
+```
+
+Otherwise, run as a standard Makefile on Linux & others. 
+
+Datastream is written to files through the Python wrapper.
+
