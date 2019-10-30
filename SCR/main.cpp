@@ -34,7 +34,7 @@ void count_sensor(Dist500* d5, iris::uip::__counter_type buffercounter) {
 }
 
 void turn_on_sensor(Dist500* d5) {
-    d5->setDoorState(1,1,100,100);
+//    d5->setDoorState(1,1,100,100);
     d5->startCounting();
 }
 
