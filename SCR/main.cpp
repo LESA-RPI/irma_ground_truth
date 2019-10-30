@@ -39,7 +39,7 @@ void turn_on_sensor(Dist500* d5) {
 }
 
 void turn_off_sensor(Dist500* d5) {
-    d5->setDoorState(1,1,0,0);
+//    d5->setDoorState(1,1,0,0);
     d5->stopCounting();
 }
 
