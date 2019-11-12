@@ -3,7 +3,7 @@ toolchain = x86_64-linux-g++-4.6.3-glibc-2.15
 sockets = $(dir)include/3rd_party/socket.cpp/src/
 tcp = $(dir)include/3rd_party/SimpleNetwork/src/
 
-main.cpp:
+toc:
 	g++ main.cpp -std=c++11 -g -w -D_GLIBCXX_USE_CXX11_ABI=0 -o tof \
 	-I $(dir)include/3rd_party/ \
 	-I $(dir)include/iris/sensor-api \
