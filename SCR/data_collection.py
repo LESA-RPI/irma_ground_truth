@@ -18,10 +18,7 @@ else:
 # write header
 output_file.writelines(["In,Out,In-Out,DeltaT"])
 
-time_to_record: int = 150       # rounds
-
-for i in range(time_to_record):
-    subprocess.call(["./tof"], shell=True, stdout=output_file)
+subprocess.call(["./tof"], shell=True, stdout=output_file)
 output_file.close()
 
 # sleep 2 && echo "TEST" & <-- final ampersand is multiprocessing

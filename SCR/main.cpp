@@ -17,7 +17,7 @@ using namespace std;
 #define SENSOR_URL "udp://10.3.35.21#1"
 
 int timedelta = 1; // seconds
-int cycles = 1000; // iterations
+int cycles = 21600; // iterations
 
 void count_sensor(Dist500* d5, iris::uip::__counter_type countertype) {
     Dist500::CountList cl;
