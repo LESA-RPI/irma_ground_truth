@@ -17,11 +17,11 @@ else:
     output_file = open(f"Trial_overwrite.csv", "w+")  # type: ignore
 
 # write header
-output_file.writelines([str(time.time())])
-output_file.writelines(["In,Out,In-Out,DeltaT"])
-
+output_file.write(f"{str(time.time())}\r\n")
+output_file.write("In,Out,In-Out,DeltaT\r\n")
 subprocess.call(["./tof"], shell=True, stdout=output_file)
+output_file.write(f"{str(time.time())}\r\n")
+
 output_file.close()
-output_file.writelines([str(time.time())])
 
 
