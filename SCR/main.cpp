@@ -1,4 +1,8 @@
 #include "includes.h"
+
+#include "pictureprocessor.h"
+#include "sensormanager.h"
+
 #include <iostream>
 #include <string>
 
