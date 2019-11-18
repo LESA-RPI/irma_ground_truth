@@ -67,8 +67,8 @@ int main() {
 
     // this workflow is the one we'd like to have-- but it returns 0 alighting/0 boarding
     turn_on_sensor(d5, start_counter);
-    SensorManager s("config.txt");
-    s.startUpdating();
+    SensorManager sm("config.txt");
+    sm.startUpdating();
     for (int i = 0; i < cycles; i++) {
         sleep(timedelta);
         count_sensor(d5, start_counter);
