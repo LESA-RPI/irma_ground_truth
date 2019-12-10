@@ -5,7 +5,7 @@ sockets = $(dir)include/3rd_party/socket.cpp/src/
 tcp = $(dir)include/3rd_party/SimpleNetwork/src/
 
 toc:
-	g++ main_v<160firmware.cpp -std=c++11 -g -w -D_GLIBCXX_USE_CXX11_ABI=0 -o tofold \
+	g++ main_v160firmware.cpp -std=c++11 -g -w -D_GLIBCXX_USE_CXX11_ABI=0 -o tofold \
 	-I $(dir)$(include_path)3rd_party/ \
 	-I $(dir)$(include_path)iris/sensor-api \
 	-I $(dir)$(include_path)3rd_party/boost-1_55_0 \

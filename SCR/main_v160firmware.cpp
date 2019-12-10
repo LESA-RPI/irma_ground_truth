@@ -55,13 +55,13 @@ int main() {
     // create DIST500 instance
     Sensor& s = dm.getSensorFor(SENSOR_URL);
     Dist500* d5 = new Dist500(s);
-    iris::uip::__counter_type start_counter = iris::uip::start_counter;
+    iris::uip::__counter_type buffer_counter = iris::uip::buffer_counter;
 
     // old workflow
-    turn_on_sensor(d5);
+    turn_on_sensor(d5, buffer_counter);
     sleep(timedelta);
     turn_off_sensor(d5);
-    count_sensor(d5, buffercounter);
+    count_sensor(d5, buffer_counter);
 
     // new workflow
 //    turn_on_sensor(d5, start_counter);
