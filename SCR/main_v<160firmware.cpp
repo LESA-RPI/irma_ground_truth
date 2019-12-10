@@ -18,7 +18,7 @@ using namespace iris::drivers;
 using namespace iris::uip;
 using namespace std;
 
-#define SENSOR_URL "udp://10.3.35.21#1"
+#define SENSOR_URL "udp://10.3.6.189#1"
 
 int timedelta = 1; // seconds
 int cycles = 86400; // iterations
@@ -58,18 +58,18 @@ int main() {
     iris::uip::__counter_type start_counter = iris::uip::start_counter;
 
     // old workflow
-//    turn_on_sensor(d5);
-//    sleep(timedelta);
-//    turn_off_sensor(d5);
-//    count_sensor(d5, buffercounter);
+    turn_on_sensor(d5);
+    sleep(timedelta);
+    turn_off_sensor(d5);
+    count_sensor(d5, buffercounter);
 
     // new workflow
-    turn_on_sensor(d5, start_counter);
-    SensorManager sm("config.txt");
-    sm.startUpdating();
-    for (int i = 0; i < cycles; i++) {
-        sleep(timedelta);
-        count_sensor(d5, start_counter);
-    };
-    turn_off_sensor(d5);
+//    turn_on_sensor(d5, start_counter);
+//    SensorManager sm("config.txt");
+//    sm.startUpdating();
+//    for (int i = 0; i < cycles; i++) {
+//        sleep(timedelta);
+//        count_sensor(d5, start_counter);
+//    };
+//    turn_off_sensor(d5);
 }
