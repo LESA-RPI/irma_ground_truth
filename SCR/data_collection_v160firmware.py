@@ -4,7 +4,7 @@
 import datetime
 import subprocess
 
-create_new: bool = False
+create_new: bool = True
 
 # create a identifier
 now_strf: str = datetime.datetime.now().strftime("%d-%m-%Y.%H:%M")
