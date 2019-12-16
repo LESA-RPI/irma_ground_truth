@@ -18,7 +18,7 @@ else:
 # write header
 output_file.writelines(["In,Out,In-Out,DeltaT"])
 
-time_to_record: int = 150       # rounds
+time_to_record: int = 14400  # rounds
 
 for i in range(time_to_record):
     subprocess.call(["./tofold"], shell=True, stdout=output_file)
